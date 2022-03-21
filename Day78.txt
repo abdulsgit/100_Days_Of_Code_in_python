@@ -1,0 +1,59 @@
+#Linear Search in 2D Arrays:-
+def search(arrmatrix,targetelement):
+    for row in range(len(arrmatrix)):
+        for column in range(len(arrmatrix[row])):
+            if (arrmatrix[row][column]==targetelement):
+               return [row,column]
+    return -1
+
+
+arrmatrix = [[23,4,1], [18,12,3,9], [78,99,34,56], [18,12]]
+targetelement = 34
+print(search(arrmatrix,targetelement)) #output:- [2, 2]
+
+
+#Given an array number of integers, return how many of them contain an even no. of digits
+
+""" here we converted the numbers into string then we divided each number by convrting it into integer
+by using len()"""
+def evendigits(nums):
+    count = 0
+    str_number = map(str,nums)
+    for s in str_number:
+        if len(s)%2==0:
+            count+=1
+    return count
+
+
+nums = [12,345,2,6,7896]
+print(evendigits(nums)) #output:- 2
+
+
+
+"""
+You are given an m * n integer where accounts[i][j] is the amount of money the ith customer has in the jth bank
+Return the wealth that the richest person has.
+"""
+def wealth(accounts):
+    #@ local variables are declared to be 0
+    max_sum = 0
+    _wealth = 0
+    #It will check the number of rows or known as accounts
+    for customer in range(len(accounts)):
+        #it will check columns or known as all money in specific banks of accounts
+        for money in range(len(accounts[customer])):
+            #it will add total money in banks and goes out of loop to check which persont account has higher money
+            _wealth += accounts[customer][money]
+
+        #it will check whose account have high wealth
+        if _wealth>max_sum:
+            max_sum = _wealth
+
+    return max_sum
+
+
+
+
+accounts = [[1,2,3], [4,2,1]]
+print(wealth(accounts)) #output:- 13
+
