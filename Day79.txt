@@ -1,0 +1,123 @@
+"""
+In Binary search Algorithm it calculates the middle element first by adding indexes of start and end element and divides
+it by 2. then it checks the element which we want either right side of the middle element or left side of the middle
+element depending upon the elements whether they are in ascending order or descending order.
+
+Best case scenario here is :-
+O(1)
+In best case we will get the element in one shot
+
+Worst case scenario here is:-
+O(log N)
+n is the size of the array
+
+Note:-
+-->Suppose we are  for an element in 1 million elements by using linear search it will take 1 million comparisons.
+-->By using Binary search it will take 20 comparisons only.
+Hence binary search is preferable
+"""
+#program to find the element in ascending order array using linear search
+#return the index
+
+def binarysearch(arr,target):
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target<arr[mid]:
+            end = mid-1
+        elif target>arr[mid]:
+            start = mid + 1
+        else:
+            #target==arrr[mid]
+            return mid
+    #nothing returns in while loop then it will return
+    return -1
+
+arr = [-18,-12,-4,0,2,3,4,15,16,18,22,45,89]
+target = 4
+print(binarysearch(arr,target)) #output :- 6
+
+
+
+
+#Program to find the element from descending order array using Binary search
+#return the index
+
+def binarysearchdescending(arr1,target1):
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target1>arr1[mid]:
+            end = mid+1
+        elif target1<arr1[mid]:
+            start = mid - 1
+        else:
+            #target==arrr[mid]
+            return mid
+    #nothing returns in while loop then it will return
+    return -1
+
+arr1 = [10,9,8,7,6,5,4,3,2,1]
+target1 = 5
+print(binarysearchdescending(arr1,target1)) #output:- 5
+
+
+
+
+
+# Order-agnostic Binary-Search
+#This program is suitable for both ascending and descending order array...
+def orderagnostic(arr, target):
+    start = 0
+    end = len(arr) - 1
+    # find whether the array is sorted in ascending or descennding
+    isasc = arr[start] < arr[end]
+    # if arr[start]<arr[end]:
+    #     return True
+    # else:
+    #     return False
+
+    while start <= end:
+        # find the middle element
+        # mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        # we can do instead of above line is mid = end-start//2
+        # or we can do this below line instead
+        mid = start + (end - start) // 2
+
+        # these condition is same for both ascending and descending
+        if (arr[mid] == target):
+            return mid
+
+        # for ascending order
+        if isasc:
+            if target < arr[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+
+        # for descending order
+        if target > arr[mid]:
+            end = mid - 1
+        else:
+            start = mid + 1
+
+
+
+#arr = [-18,-12,-4,0,2,3,4,15,16,18,22,45,89]
+arr=[99,80,75,22,11,10,5,2,-3]
+target = 22
+print(orderagnostic(arr, target))
