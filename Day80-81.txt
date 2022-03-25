@@ -1,0 +1,135 @@
+#returns the index of greatest smallest number of target number
+def ceiling(arr,target):
+    #this executes if the target element in the sorted array is the greater than the greatest number in the array
+    #as we know there would be no elements availabilty be there
+    if target > arr[len(arr)-1]:
+        return -1
+
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target<arr[mid]:
+            end = mid-1
+        elif target>arr[mid]:
+            start = mid + 1
+        else:
+            #target==arr[mid]
+            return mid
+    #when while loop fails  it will return start which is our ceiling
+    return start
+
+arr = [2,3,5,9,14,16,18]
+target = 17
+#if we put target = 19
+#output would be -1
+print(ceiling(arr,target)) #output :- 6
+
+
+#Find the greater smaller number of or equal to target(returns index)
+def floor(arr,target):
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target<arr[mid]:
+            end = mid-1
+        elif target>arr[mid]:
+            start = mid + 1
+        else:
+            #target==arr[mid]
+            return mid
+    #when while loop fails it will return end it is our floor value
+    return end
+
+arr = [2,3,5,9,14,16,18]
+target = 7
+print(floor(arr,target)) #output :- 2 (it is index value 2
+
+
+
+
+"""
+Q)Given a character of array letters that is sorted in non-decreasing order and a character target return the
+smallest character in the array that is larger than target.
+
+Note:-
+There are two changes in this program compared to ceiling program.
+1)There would be no (equal to) for camparing target.
+2)It would return first character if target ig greater than greatest character of the array
+
+"""
+
+
+def smallestletter(arr,target):
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target<arr[mid]:
+            end = mid-1
+        else:
+            start = mid + 1
+
+    return arr[start%len(arr)]
+
+arr = ["c", "f", "j"]
+target ="j"
+#if target is d
+print(smallestletter(arr,target))
+#output:- c)
+
+
+
+
+"""
+Q)Given an array of integer numbers sorted in ascending order,fnd the starting and
+ending position of the target value
+-->if target not found return [-1,-1]
+-->O(log n) complexity
+
+"""
+
+def binarysearch(arr,target):
+    start = 0
+    end = len(arr)-1
+
+    while start<=end:
+        #find the middle element
+        #mid = start+end//2 #might be possible that after adding it may exceeds the range may give error
+        #we can do instead of above line is mid = end-start//2
+        #or we can do this below line instead
+        mid =start +(end-start)//2
+
+        if target<arr[mid]:
+            end = mid-1
+        elif target>arr[mid]:
+            start = mid + 1
+        else:
+            #target==arr[mid] returns starting and ending position of given target
+            return [start,end]
+    #if while loop violates this returns
+    return arr[-1,-1]
+
+arr = [1,2,3,4,5,6]
+target = 5
+print(binarysearch(arr,target)) #output :- [3,5]
+
