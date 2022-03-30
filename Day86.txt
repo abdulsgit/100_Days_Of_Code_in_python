@@ -1,0 +1,23 @@
+def peakindexmountainarray(arr):
+    start = 0
+    end = len(arr)-1
+
+    while(start<end):
+        mid = start+(end-start)//2
+        if arr[mid] > arr[mid+1]:
+            #we are in decreasing part of array and this maybe the answer but look at left
+           end = mid
+        else:
+            #we are in ascending part of array
+            start = mid+1 #coz we knw that mid+1>mid
+    #in the end we know start==mid and pointing to the largest number because of the 2 checks above
+    #start and end will always try to find max element in above 2 checks.
+    #hence when they are pointing to just 1 element that is max number i.e. what check say
+    #every point of time start and end they have the best possible answer till that time and if we are saying that only 1 item is remaining
+    #hence because of above line that is possible answer
+    return start
+    #we can return start or end both are equal
+
+arr=[1,2,1]
+print(peakindexmountainarray(arr))
+
