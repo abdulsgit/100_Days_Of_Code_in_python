@@ -1,0 +1,152 @@
+Line Graph:-
+---------------
+import matplotlib.pyplot as graph #we can give any name to matplotlib.pyplot here i gave graph
+
+Days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+Numbers=[25,15,20,10,18,30,20]
+
+#plot method is used here which takes 2 arguments X-axis and Y-axis
+graph.plot(Days,Numbers,color='red',linewidth=5,marker='o',markerfacecolor='blue',markersize=12,
+           linestyle='dashed')#we can write instead of dash dotted or dashnot
+
+#so i want to lable the both axis so i will use xlable method
+graph.xlabel('Days')
+graph.ylabel('Number of pull ups ')
+graph.title('My pull ups Graph')
+
+#to display we will use show method
+graph.show()
+
+
+
+2)Multiple Line Graph
+---------------------------
+import matplotlib.pyplot as multiple #multiple represents this module
+
+#data
+subjects=['computer','english','biology','maths','chemistry','history']
+mymarks=[80,90,87,91,88,99]
+my_frnd_marks=[99,80,93,83,95,80]
+
+multiple.plot(subjects,mymarks,label='My Marks')
+multiple.plot(subjects,my_frnd_marks,label='My frnds Marks')
+#x-axis
+multiple.xlabel('Subjects',)
+#y-axis
+multiple.ylabel('Marks')
+
+multiple.title('Marks Comparison')
+
+#this will add specific labels of the graph
+multiple.legend()
+
+#to see graph
+multiple.show()
+
+
+3)Color Picker
+-----------------
+from tkinter import *
+import pyperclip
+def slide(value):
+
+    R=r_scale.get()
+    B=b_scale.get()
+    G=g_scale.get()
+
+    rgb = f'{R},{G},{B}'
+    #converting rbg code to hex code
+    hex="#%02x%02x%02x" % (R,G,B)
+    #now we are able to see color in the label
+    colorlabel.config(bg=hex)
+    #deletes the previous hex color
+    hex_entry.delete(0,END)
+    #hex_entry
+    hex_entry.insert(0,hex)#hex value is inserted in the 0th position
+
+    #deleting and inserting rgb code same as hex
+    rgb_entry.delete(0,END)
+    rgb_entry.insert(0,rgb)
+
+#function to copy pyperlip to hex
+def hex_copy():
+    pyperclip.copy(hex_entry.get())
+
+def rgb_copy():
+    pyperclip.copy(rgb_entry.get())
+#object of Tk class creates a window
+root=Tk()
+
+#title of the window
+root.title('ColorPicker')
+
+#width and height of window
+#280 is width and 420 is height ,100 is distance from x-axis and 100 is distance from y-axis
+root.geometry('280x450+100+100')
+
+colorlabel=Label(root,bg='black',width=30,height=9,bd=2,relief=RAISED)
+
+#pack method made the label visible
+colorlabel.pack(pady=5)
+
+frame=Frame(root,bd=2,relief=SUNKEN)
+frame.pack(pady=5)
+
+#R
+r_label=Label(frame,text='R',fg='red',font=('arial',10,'bold'))
+r_label.grid(row=0,column=0)
+
+#A scale will appear inside frame horizontally
+r_scale=Scale(frame,from_=0,to=255,length=210,fg='red',orient=HORIZONTAL,command=slide)
+r_scale.grid(row=0,column=1)
+
+#G
+g_label=Label(frame,text='G',fg='green',font=('arial',10,'bold'))
+g_label.grid(row=1,column=0)
+
+g_scale=Scale(frame,from_=0,to=255,length=210,fg='green',orient=HORIZONTAL,command=slide)
+g_scale.grid(row=1,column=1)#column 1 coz it is below R
+
+#B
+b_label=Label(frame,text='B',fg='blue',font=('arial',10,'bold'))
+b_label.grid(row=2,column=0)
+
+b_scale=Scale(frame,from_=0,to=255,length=210,fg='blue',orient=HORIZONTAL,command=slide)
+b_scale.grid(row=2,column=1)
+
+#Another Frame is created inside root window
+frame2=Frame(root,bd=2,relief=SUNKEN)
+frame2.pack(pady=5)
+
+#Hex inside frame2
+hex_label=Label(frame2,text='Hex code :',font=('arial',10,'bold'))
+hex_label.grid(row=0,column=0)
+
+#entry field for hex
+hex_entry=Entry(frame2,width=12,font=('arial',10))
+hex_entry.grid(row=0,column=1,padx=5)
+#bydefault color for hex
+hex_entry.insert(END,'#000000')
+
+#giving butoon to hex
+copybutton=Button(frame2,text='copy',font=('arial',10,'bold'),command=hex_copy)
+copybutton.grid(row=1,columnspan=2,pady=7)#columnspan=2 takes all the columns inside it
+
+#RGB label
+rgb_label=Label(frame2,text='RGB code :',font=('arial',10,'bold'))
+rgb_label.grid(row=2,column=0)
+
+#RGB entry
+rgb_entry=Entry(frame2,width=12,font=('arial',10))
+rgb_entry.grid(row=2,column=1,padx=5)
+#bydefault color of rgb
+rgb_entry.insert(END,'0,0,0')
+#button for rgb entry
+copybutton2=Button(frame2,text='copy',font=('arial',10,'bold'),command=rgb_copy)
+copybutton2.grid(row=3,columnspan=2,pady=7)#columnspan=2 takes all the columns inside it
+
+
+#to view our window
+root.mainloop()
+
