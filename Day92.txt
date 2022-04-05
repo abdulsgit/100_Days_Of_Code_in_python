@@ -1,0 +1,167 @@
+1)Password Generator using python
+==================================
+[M"%%from tkinter import *
+import string
+import pyperclip
+#to generate password we have to import random
+import random
+def generator():
+    #types of characters used to generate password
+    smallalphabet=string.ascii_lowercase
+    capitalalphabet=string.ascii_uppercase
+    numbers=string.digits
+    specialchar=string.punctuation
+    #combining all letters and digits
+    allapha=smallalphabet+capitalalphabet+numbers+specialchar
+
+    #we have to generate password in a length
+    #lengthbox.get() will get in form of string so we wil take it in integer
+    passwordlength=int(lengthbox.get())
+
+    #sample method is used
+    password=random.sample(allapha,passwordlength)
+
+    if choice.get()==1:
+        entryfield.insert(0,random.sample(smallalphabet,passwordlength))
+
+    if choice.get()==2:
+        entryfield.insert(0,random.sample(smallalphabet+capitalalphabet,passwordlength))
+
+    if choice.get()==3:
+        entryfield.insert(0,random.sample(smallalphabet,passwordlength))
+
+    if choice.get()==1:
+        entryfield.insert(0,random.sample(allapha,passwordlength))
+
+
+    #displaying password in text field
+    #entering password in 0th index
+    entryfield.insert(0,password)
+
+
+def copy():
+
+    storing=entryfield.get()
+    pyperclip.copy(storing)
+
+
+#creating object of tk class
+root = Tk()
+
+#changing background color of our window
+root.config(bg='gray20')
+
+#this is for weak radio button
+choice=IntVar()
+Font=('arial',13,'bold')
+#label class is used on root window by passing a text for the label
+#bg is used inside the label class for changing background specifically of label
+#fg for foreground color
+passwordlabel = Label(root,text='Password Generator',font=('times new roman',20,'bold'),bg='gray20',fg='white')
+#grid method helps to add label on the screen
+passwordlabel.grid(pady=10)
+
+#creating a weak radio button
+weakradiobutton = Radiobutton(root,text='Weak',value=1,variable=choice,font=Font)
+weakradiobutton.grid(pady=5)#pady=5 provides vertical spacing between radio button
+
+#creating a medium radio button
+mediumradiobutton = Radiobutton(root,text='Medium',value=2,variable=choice,font=Font)
+mediumradiobutton.grid(pady=5)
+
+#creating a strong radio button
+strongradiobutton = Radiobutton(root,text='Strong',value=3,variable=choice,font=Font)
+strongradiobutton.grid(pady=5)
+
+#2nd label in our root window
+lengthlabel = Label(root,text='Password length',font=Font,bg='gray20',fg='white')
+#grid method helps to add label on the screen
+lengthlabel.grid(pady=5)
+
+#creating a spinbox object in root window
+#we can select numbers from 5 to 18
+#its width would be 5
+lengthbox=Spinbox(root,from_=5,to=18,width=5,font=Font)
+lengthbox.grid(pady=5)
+
+#creating a generate button using button class
+generatebutton=Button(root,text='Generate',font=Font,command=generator)
+generatebutton.grid(pady=5)
+
+#creating entry field
+#bd is for border line
+entryfield=Entry(root,width=25,bd=2)
+entryfield.grid()
+
+#copy button
+copybutton=Button(root,text='copy',font=Font,command=copy)
+copybutton.grid(pady=5)
+
+
+#mainloop keeps our object in loop through which we would be able to see our window continiously
+root.mainloop() 
+
+
+2)Vertical graph
+=======================
+import matplotlib.pyplot as graph
+
+interests=['c','c++','java','python','javascript']
+students=[10,20,30,40,50]
+
+#bar method is used
+#in bar method the width is by-default 0.8
+#we can change width of each bar by using list in width
+#color is applied to all the bars when color='red'
+#we can apply each color to each bar by using list in color=[]
+#we can pass a variable to width and color with list of colors and widths
+#width=[0.2,0.3,0.4,0.5,0.6]
+#color=[red,green,yellow,blue,brown]
+#width=width and color=color(this way can be done too)
+graph.bar(interests,students,width=[0.2,0.3,0.4,0.5,0.6],color='red')
+
+#labelling x-axis
+graph.xlabel('Types of programming languages')
+
+#labelling y-axis
+graph.ylabel('No.of students')
+
+#title of the graph
+graph.title('Preference of Languages')
+
+#showing the graph by using show method
+graph.show()
+
+
+3)Horizontal Graph:-
+=======================
+import matplotlib.pyplot as graph
+
+interests=['c','c++','java','python','javascript']
+students=[10,20,30,40,50]
+
+#barh method is used which means horizontally type of graph is showed
+#in barh method we will use height
+#we can change width of each bar by using list in width
+#color is applied to all the bars when color='red'
+#we can apply each color to each bar by using list in color=[]
+#we can pass a variable to width and color with list of colors and widths
+#width=[0.2,0.3,0.4,0.5,0.6]
+#color=[red,green,yellow,blue,brown]
+#width=width and color=color(this way can be done too)
+graph.barh(interests,students,height=[0.2,0.3,0.4,0.5,0.6],color='red')
+
+#y label has to be students
+#labelling y-axis
+graph.ylabel('Types of programming languages')
+
+#x-label is changed to interests
+#labelling x-axis
+graph.xlabel('No.of students')
+
+#title of the graph
+graph.title('Preference of Languages')
+
+#showing the graph by using show method
+graph.show()
+
