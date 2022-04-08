@@ -1,0 +1,35 @@
+1)Black & White QR code:-
+=============================
+#creating an alias for qrcode as qr
+import qrcode as qr
+#creating a variable and using make function
+#we are giving url to make a qr code or we can give anything like text message too also link
+#make will convert it into QR code
+img=qr.make("https://www.youtube.com/c/KunalKushwaha")
+#we have to save this now by using save function
+#we can give any name for saving this with .png as it is an image
+img.save("Kunal_Kushawa_Youtube.png")
+
+
+2)Colored QRcode:-
+--------------------------
+import qrcode.constants
+from qrcode import QRCode
+from PIL import Image
+
+#QRcode is a function
+#it changes border and many things...
+#high level error is removed
+qr=QRCode(version=1,
+          error_correction=qrcode.constants.ERROR_CORRECT_H,
+          box_size=20,
+          border=4
+          )
+
+#providing data for which we are making qrcode
+qr.add_data("https://www.youtube.com/c/KunalKushwaha")
+#if add_data value is received then only it gives output that's why fit=True
+qr.make(fit=True)
+#creating an image
+img=qr.make_image(fill_color="red",back_color="white")
+img.save("Kunal_Kushawa_Youtube.png")
