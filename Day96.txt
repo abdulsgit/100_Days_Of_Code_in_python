@@ -1,0 +1,55 @@
+Internet Speed Test
+==========================
+
+ from tkinter import *
+import speedtest
+
+def speedcheck():
+    st=speedtest.Speedtest()
+    #we will get server
+    st.get_servers()
+    down=str(round(st.download()/(10**6),3))+" Mbps"  #to get in mbps upto 3 digits in string
+    up=str(round(st.upload()/(10**6),3))+" Mbps"  #to get in mbps upto 3 digits in string
+    #setting parametres
+    #text=down means it will exchange below text with down text
+    label_down.config(text=down)
+    label_up.config(text=up)
+
+
+#Tk() class is called
+sp = Tk()
+sp.title("Internet Speed Test")
+#window size
+sp.geometry("500x700")
+#background color
+sp.config(bg="Blue")
+
+label = Label(sp,text="Internet Speed Test",font=("Time New Roman",30,"italic"),bg="blue",fg="white")
+#for position
+label.place(x=50,y=40,height=50,width=400)
+
+label = Label(sp,text="Downloading Speed",font=("Time New Roman",30,"italic"))
+ #for position
+label.place(x=60,y=130,height=50,width=400)
+#
+label_down = Label(sp,text="00",font=("Time New Roman",30,"italic"))
+#for position
+label_down.place(x=60,y=200,height=50,width=400)
+
+label= Label(sp,text="Upload Speed",font=("Time New Roman",30,"italic"))
+#for position
+label.place(x=60,y=290,height=50,width=400)
+
+label_up = Label(sp,text="00",font=("Time New Roman",30,"italic"))
+#for position
+label_up.place(x=60,y=360,height=50,width=400)
+
+#relief is used for 3d showing of button
+button=Button(sp,text="Check Speed",font=("Time New Roman",30,"bold"),relief=RAISED,bg="violet",command=speedcheck)
+button.place(x=60,y=460,height=50,width=400)
+
+
+
+
+
+sp.mainloop()
