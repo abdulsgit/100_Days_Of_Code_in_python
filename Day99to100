@@ -1,0 +1,196 @@
+On Screen Keyboard:-
+=======================
+from tkinter import *
+import ttkthemes
+#import ttk to apply in buttons
+from tkinter import ttk
+
+#lambda function value is passed here
+def select(selectedvalue):
+    if selectedvalue == 'Space':
+        # insert method is used
+       textarea.insert(INSERT,' ')
+
+    elif selectedvalue == 'Enter':
+         textarea.insert(INSERT, '\n')
+
+    elif selectedvalue == "Tab":
+         textarea.insert(INSERT, '\t')
+
+    elif selectedvalue == "Del":
+        # deleted method is used
+         textarea.delete(1.0, END)
+
+    elif selectedvalue=='Backs':
+         #we are storing the whole text in a variable first by using get method
+         wholetext=textarea.get(1.0,END)
+         #we will use slicing for removing variables of our choice from wholetext and storing it into newtext
+         newtext=wholetext[:-2]
+         #we will delete the wholetext from textarea or else it will display wholetext with newtext side by side
+         textarea.delete(1.0,END)
+         #inserting the newtext now after backspace has used
+         textarea.insert(INSERT,newtext)
+
+    elif selectedvalue=='LShift':
+        leftshiftbuttons=['(', ')', '_', '-', '+', '=', '!', '@', '#', '$', '%',
+                          '{', '[', '}', ']', '\ ', ':', ' " ', " ' ", ' , ',
+                          '<', '>', '&', '*', '|', '/', '.', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+                          'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+                          'x','y','z','RShift']
+
+        varrow=2
+        varcolumn=0
+        for button in leftshiftbuttons:
+            # everytime a button is clicked select function will be called
+            command = lambda x=button: select(x)
+            # Except space we are creating every other button
+            if button != 'Space':
+                # Button class is used
+                # ttk is used to apply the theme
+                ttk.Button(root, text=button, width=5, command=command).grid(row=varrow, column=varcolumn)
+
+            # place the space button in else part separately
+            else:
+                # applying ttk to space bar also
+                ttk.Button(root, text=button, width=20).grid(row=7, column=0, columnspan=15)
+            # we have to increase column values for buttons
+            varcolumn += 1  # upto 15 spaces or columns buttons are placed under text area then after that all are placed in Oth,row
+            # buttons will be placed in new row
+            if varcolumn > 14:
+                # new buttons will be placed in new rows with 0th columns to upto 14
+                varcolumn = 0
+                varrow += 1
+
+
+    elif selectedvalue=='RShift':
+
+        rightshiftbuttons=[
+
+            'Tab', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            'Ctrl', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'Alt', 'O', 'P', 'A', 'S', 'D',
+            'Capsl', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Enter', 'LShift',
+            'RShift', 'Backs', 'Esc', 'Del', 'Space'
+        ]
+
+        varrow = 2
+        varcolumn = 0
+        for button in rightshiftbuttons:
+            # everytime a button is clicked select function will be called
+            command = lambda x=button: select(x)
+            # Except space we are creating every other button
+            if button != 'Space':
+                # Button class is used
+                # ttk is used to apply the theme
+                ttk.Button(root, text=button, width=5, command=command).grid(row=varrow, column=varcolumn)
+
+            # place the space button in else part separately
+            else:
+                # applying ttk to space bar also
+                ttk.Button(root, text=button, width=20).grid(row=7, column=0, columnspan=15)
+            # we have to increase column values for buttons
+            varcolumn += 1  # upto 15 spaces or columns buttons are placed under text area then after that all are placed in Oth,row
+            # buttons will be placed in new row
+            if varcolumn > 14:
+                # new buttons will be placed in new rows with 0th columns to upto 14
+                varcolumn = 0
+                varrow += 1
+
+    elif selectedvalue=='Capsl':
+        capsbuttons=[
+            'Tab', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            'Ctrl', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'Alt', 'O', 'P', 'A', 'S', 'D',
+            'Capsl', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Enter', 'LShift',
+            'RShift', 'Backs', 'Esc', 'Del', 'Space'
+        ]
+
+        varrow = 2
+        varcolumn = 0
+        for button in capsbuttons:
+            # everytime a button is clicked select function will be called
+            command = lambda x=button: select(x)
+            # Except space we are creating every other button
+            if button != 'Space':
+                # Button class is used
+                # ttk is used to apply the theme
+                ttk.Button(root, text=button, width=5, command=command).grid(row=varrow, column=varcolumn)
+
+            # place the space button in else part separately
+            else:
+                # applying ttk to space bar also
+                ttk.Button(root, text=button, width=20).grid(row=7, column=0, columnspan=15)
+            # we have to increase column values for buttons
+            varcolumn += 1  # upto 15 spaces or columns buttons are placed under text area then after that all are placed in Oth,row
+            # buttons will be placed in new row
+            if varcolumn > 14:
+                # new buttons will be placed in new rows with 0th columns to upto 14
+                varcolumn = 0
+                varrow += 1
+
+    #rest all other values are inserted in textarea
+    else:
+        textarea.insert(INSERT,selectedvalue)
+
+
+
+
+
+
+        # for cursor to continiousl blink in the text area
+    textarea.focus_set()
+
+
+
+
+
+#after importing ttkthemes these tk class will become themedtk
+root = ttkthemes.ThemedTk()
+#we need to get themes now so we will write
+root.get_themes()
+#setting up the theme
+#we can choose any theme
+root.set_theme('radiance')
+
+root.title("On Screen Keyboard")
+
+#resizing the window it will not be maximized
+root.resizable(False,False)
+
+titlelabel=Label(root,text="On Screen Keyboard",font=("arial",20,'bold'))
+titlelabel.grid(row=0,column=0,columnspan=15)#grid method is used
+
+#text area gives us to write
+textarea=Text(root,font=('arial',15,'bold'),height=10,width=100,bd=8,relief=SUNKEN)#text class is used
+textarea.grid(row=1,column=0,columnspan=15)
+textarea.focus_set()#for the cursor
+
+varrow=2
+varcolumn=0
+
+buttons= [
+'Tab','1','2','3','4','5','6','7','8','9','10',
+'Ctrl','Q','W','E','R','T','Y','U','I','Alt','O','P','A','S','D',
+'Capsl','F','G','H','J','K','L','Z','X','C','V','B','N','M','Enter','LShift',
+'RShift','Backs','Esc','Del','Space']
+
+
+for button in buttons:
+    #everytime a button is clicked select function will be called
+    command= lambda x=button: select(x)
+    #Except space we are creating every other button
+    if button!='Space':
+    #Button class is used
+    #ttk is used to apply the theme
+       ttk.Button(root,text=button,width=5,command=command).grid(row=varrow,column=varcolumn)
+
+    #place the space button in else part separately
+    else:
+        #applying ttk to space bar also
+        ttk.Button(root,text=button,width=20).grid(row=7,column=0,columnspan=15)
+    #we have to increase column values for buttons
+    varcolumn+=1 #upto 15 spaces or columns buttons are placed under text area then after that all are placed in Oth,row
+    #buttons will be placed in new row
+    if varcolumn>14:
+        #new buttons will be placed in new rows with 0th columns to upto 14
+          varcolumn=0
+          varrow+=1
+root.mainloop()
